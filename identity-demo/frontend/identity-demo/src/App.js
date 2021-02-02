@@ -2,6 +2,8 @@ import './App.css';
 import axios from 'axios';
 import IdentitySdk from '@combateafraude/identity-sdk'
 
+axios.defaults.baseURL = 'http://localhost:8081';
+
 function App() {
   const signIn = async () => {
     const cpf = document.getElementById('cpf');
@@ -34,9 +36,9 @@ function App() {
     <div className="container">
       <div className="content">
         CPF:
-        <input id="cpf" className="input-login" defaultValue="000.000.000-00"></input>
+        <input id="cpf" className="input-login"></input>
         Senha:
-        <input id="password" className="input-login" defaultValue="senha123" type="password"></input>
+        <input id="password" className="input-login" type="password"></input>
         <button onClick={signIn}>Entrar</button>
       </div>
 
