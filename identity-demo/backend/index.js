@@ -2,6 +2,7 @@ const express = require('express');
 const { verify: verifyJwt } = require('jsonwebtoken');
 
 const app = express();
+const cors = require('cors');
 
 /* On production, these consts should be stored as environment variables */
 // The network port where the API will be listening
@@ -23,6 +24,8 @@ const mobileToken = '';
 // IMPORTANT: This secret should *never* leave your backend
 // Docs: https://docs.combateafraude.com/docs/identity/checking-responses/#como-obter-seu-clientsecret
 const identitySecret = '';
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('Identity DEMO Backend');
