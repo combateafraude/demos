@@ -13,7 +13,7 @@ function App() {
 
     const credentials = await axios.post('/credentials', { cpf: cpf.value, password: password.value });
     const { identityPolicyId, identityToken, mobileToken } = credentials.data;
-    const identityOptions = { mobileToken: mobileToken, throwOnRecall: true };
+    const identityOptions = { mobileToken: mobileToken, throwOnRecall: false };
     const identity = new IdentitySdk(identityToken, identityOptions);
     const response = await identity.verifyPolicy(cpf.value, identityPolicyId);
 
