@@ -6,24 +6,24 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 
-/* On production, these consts should be stored as environment variables */
-// The network port where the API will be listening
+/* Em produção, essas constantes devem ser armazenadas como variáveis de ambiente */
+// A porta em que a API vai estar escutando
 const apiPort = 8081;
 
-// The ID of the policy used in order to verify the user's identity
+// O ID da política que será usada para verificar a identidade do usuário
 // Docs: https://docs.combateafraude.com/docs/identity/home/#cria%C3%A7%C3%A3o-de-pol%C3%ADticas-de-acesso
 const identityPolicyId = '';
 
-// The token you will send so your clients can use Identity SDK
+// O token enviado para que os clientes possam usar o Identity SDK
 // Docs: https://docs.combateafraude.com/docs/identity/home/#como-ter-acesso-ao-token-de-integra%C3%A7%C3%A3o
 const identityToken = '';
 
-// The token you will send so your clients can use CAF's Faceliveness SDK
+// O token enviado para que os clientes possam usar o SDK de prova de vida passiva
 // Docs: https://docs.combateafraude.com/docs/mobile/introduction/mobile-token/
 const mobileToken = '';
 
-// The secret you will use to verify your client's attestations.
-// IMPORTANT: This secret should *never* leave your backend
+// O segredo usado para verificar as attestations vindas do Identity SDK
+// IMPORTANTE: Esse segredo *nunca* deve sair do seu backend
 // Docs: https://docs.combateafraude.com/docs/identity/checking-responses/#como-obter-seu-clientsecret
 const identitySecret = '';
 
@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
     res.send('Identity DEMO Backend');
 });
 
-// Route used to validate user credentials (cpf and password)
+// Rota usada para verificar as credenciais do usuário (CPF e senha)
 app.post('/credentials', (req, res) => {
     const { cpf, password } = req.body;
 
@@ -44,13 +44,14 @@ app.post('/credentials', (req, res) => {
         return res.status(400).send('The parameters "cpf" and "password" are required');
     }
 
-    // You should verify that the pair <cpf, password> is valid
+    // Verificar se o par <cpf, senha> é válido
     if (password !== "password") {
         return res.status(401).send('Invalid credentials');
     }
 
-    // If the credentials are correct, send the tokens so the user can authenticate
-    // via Identity SDK *before* granting him access to the system. 
+    // Se as credenciais estão corretas, enviar os tokens para que o usuário
+    // possa se autenticar usando o Identity SDK. É importante que você faça isso
+    // *antes* de liberar ao usuário qualquer acesso ao seu sistema. 
     res.send({
         identityPolicyId,
         identityToken,
@@ -58,7 +59,7 @@ app.post('/credentials', (req, res) => {
     });
 });
 
-// Route used to validate Identity SDK attestation
+// Rota usada para verificar a attestation retornada pelo Identity SDK
 // Docs: https://docs.combateafraude.com/docs/identity/checking-responses
 app.post('/login', (req, res) => {
     const { cpf, password, attestation } = req.body;
@@ -67,7 +68,7 @@ app.post('/login', (req, res) => {
         return res.status(400).send('The parameters "cpf", "password" and "attestation" are required');
     }
 
-    // You should verify that the pair <cpf, password> is valid
+    // Verificar se o par <cpf, senha> é válido
     if (password !== "password") {
         return res.status(401).send('Invalid credentials');
     }
@@ -75,6 +76,7 @@ app.post('/login', (req, res) => {
     let payload;
 
     try {
+        // Verificar se o attestation foi assinado usando seu secret
         payload = verifyJwt(attestation, identitySecret);
     }
     catch (error) {
@@ -83,11 +85,13 @@ app.post('/login', (req, res) => {
 
     const { peopleId, policyId, isAuthorized } = payload;
 
+    // Verificar se o usuário foi autorizado e o CPF e a política usados na
+    // autenticação via SDK do Identity são os esperados
     if (!isAuthorized || peopleId !== cpf || policyId !== identityPolicyId) {
         return res.status(401).send('Invalid attestation');
     }
 
-    // The user is authenticated via Identity SDK, you can log him in
+    // O usuário foi autenticado via Identity SDK, liberar acesso ao sistema
     return res.send('Valid attestation. User is authenticated');
 });
 
