@@ -1,0 +1,97 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 95vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.box-content {
+    border: 1px solid#d9d9d9;
+    background-color: #d9d9d965;
+    border-radius: 1rem;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.input-login {
+    margin: 2px 0 7px 0;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    line-height: 1.3;
+    font-size: 18px;
+    padding: 5px;
+}
+
+.button-login {
+    background: #39c560;
+    border-color: #39c560;
+    text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+    box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+    color: #fff!important;
+    background-color: #39c560!important;
+    border: 1px solid #39c560!important;
+    margin-top: 5px;
+    line-height: 2;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    font-weight: 500;
+    font-size: 16px;
+    border-radius: 100px;
+    letter-spacing: .4px;
+}
+
+.div-label {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(68, 177, 68, 0.507);
+    border: 1px solid rgba(68, 177, 68, 0.507);
+    border-radius: 1rem;
+}
+
+.auth-label {
+    color: black;
+    font-weight: 500;
+    line-height: 2;
+}
+
+.no-div-label {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(177, 68, 68, 0.507);
+    border: 1px solid rgba(177, 68, 68, 0.507);
+    border-radius: 1rem;
+}
+
+.logo-caf {
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.subtitle {
+    font-size: 16px;
+    margin-top: 0;
+}
+
+.subtitle-password {
+    font-size: 12px;
+    margin-bottom: 10px;
+}

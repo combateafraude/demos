@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>Identity Demo</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" src="index.js">
+    </script>
+
+    <script type="text/javascript" src="./assets/index.js" onerror="alert('Falha ao carregar script do Identity SDK.\nSalve-o como \'index.js\' dentro da pasta \'assets\'.')">
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="box-content">
+            <img src=./assets/logo.png alt="" class="logo-caf" />
+            <p class="title">Identity Demo</p>
+            <p class="subtitle">Insira o CPF de uma identidade existente para testar a autenticação.</p>
+            <div class="content">
+                <b>CPF:</b>
+                <input id="cpf" class="input-login"></input>
+                <b>Senha:</b>
+                <input id="password" class="input-login" type="password"></input>
+                <span class="subtitle-password">* Senha padrão pra autenticação: password</span>
+                <button onClick="signIn()" class="button-login">Entrar</button>
+
+                <div id="status-container">
+                    <span class="auth-label"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

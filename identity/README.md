@@ -10,4 +10,5 @@ Os exemplos de backend contém o código necessário para validação do attesta
 
 ### Exemplos de implementação frontend:
 
+* [JavaScript](./frontend_javascript)
 * [React](./frontend_react)
